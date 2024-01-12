@@ -7,11 +7,29 @@ export const Licencias = () => {
 
   useEffect(() => {
     getDocentes()
-  }, [docentes])
+  }, [])
 
   async function getDocentes () {
     const { data } = await supabase.from('docentes').select()
     setDocentes(data)
+  }
+
+  async function handleUpdate () {
+    supabase.channel('custom-all-channel')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'docentes' },
+        (payload) => {
+          console.log('Change received!', payload)
+        }
+      )
+      .subscribe()
+  }
+
+  const handleDelete = async (docente) => {
+    await supabase.from('docentes').delete().eq('id', docente)
+    setDocentes(docentes.filter((d) => d.id !== docente))
+    handleUpdate()
   }
 
   return (
@@ -34,6 +52,9 @@ export const Licencias = () => {
               <td>{docente.desde}</td>
               <td>{docente.hasta}</td>
               <td>{docente.observaciones}</td>
+              <td>
+                <button onClick={() => handleDelete(docente.id)}>Eliminar</button>
+              </td>
             </tr>
           ))}
         </tbody>
