@@ -1,11 +1,6 @@
+import { supabase } from '../components/client'
 import { useEffect, useState } from 'react'
-import { createClient } from '@supabase/supabase-js'
 import './licencias.css'
-
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 export const Licencias = () => {
   const [docentes, setDocentes] = useState([])
