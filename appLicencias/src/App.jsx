@@ -13,7 +13,9 @@ export function App () {
   return (
     <main>
       {licencias ? <Licencias /> : <Formulario />}
-      <button className='verLic' onClick={manejoClick}>Vista General</button>
+      <button className='verLic' onClick={manejoClick}>
+        {licencias ? 'Formulario' : 'Licencias'}
+      </button>
     </main>
   )
 }

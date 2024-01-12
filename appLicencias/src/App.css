@@ -44,4 +44,5 @@ input {
   position: absolute;
   top: 5px;
   left: 5px;
+  min-width: 200px;
 }
