@@ -1,7 +1,7 @@
-import { Licencias } from './pages/Licencias.jsx'
-import { Formulario } from './pages/Formulario.jsx'
+import { Licencias } from './pages/licencias.jsx'
+import { Formulario } from './pages/formulario.jsx'
 import { useState } from 'react'
-import './App.css'
+import './app.css'
 
 export function App () {
   const [licencias, setLicencias] = useState(false)
