@@ -1,7 +1,6 @@
 import { supabase } from '../components/client'
 import { useEffect, useState } from 'react'
 import { Tablas } from '../components/tablas'
-import './licencias.css'
 
 export const Licencias = () => {
   const [data, setData] = useState([])
@@ -14,34 +13,35 @@ export const Licencias = () => {
     const { data } = await supabase
       .from('docentes')
       .select()
-    setData(data)
+
+    const sortedData = data.reduce((acc, fila) => {
+      const nombre = fila.nombre
+
+      if (!acc[nombre]) {
+        acc[nombre] = []
+      }
+
+      acc[nombre].push(fila)
+      return acc
+    }, {})
+
+    const result = Object.entries(sortedData).map(([nombre, datos]) => ({
+      nombre,
+      datos
+    }))
+
+    setData(result)
   }
-
-  // async function handleUpdate () {
-  //   supabase.channel('custom-all-channel')
-  //     .on(
-  //       'postgres_changes',
-  //       { event: '*', schema: 'public', table: 'docentes' },
-  //       (payload) => {
-  //         console.log('Change received!', payload)
-  //       }
-  //     )
-  //     .subscribe()
-  // }
-  // const handleDelete = async (table) => {
-  //   await supabase.from('docentes').delete().eq('id', table)
-
-  //   handleUpdate()
-  // }
 
   return (
     <main>
-      {data.map((d) => (
-        <div key={d.id}>
-          <Tablas nombre={d.nombre} licencia={d.licencia} desde={d.desde} hasta={d.hasta} observaciones={d.observaciones} />
-          {/* <button onClick={() => handleDelete(table)}>Eliminar</button> */}
-        </div>
-      ))}
+      {console.log(data)}
+      {data &&
+         data.map(({ nombre, datos }) => (
+          <div key={nombre}>
+            <Tablas nombre={nombre} datos={datos} />
+          </div>
+        ))}
     </main>
   )
 }

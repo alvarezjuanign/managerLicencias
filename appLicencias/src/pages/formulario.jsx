@@ -1,4 +1,5 @@
 import { supabase } from '../components/client'
+import './formulario.css'
 
 export const Formulario = () => {
   const manejoSubmit = async (e) => {
@@ -7,37 +8,35 @@ export const Formulario = () => {
 
     if (fields.nombre === '') return
     if (fields.licencia === '') return
-    if (fields.desde === '') return
-    if (fields.hasta === '') return
+    if (fields.mes === '') return
 
-    console.log(fields)
     const { data, error } = await supabase
       .from('docentes')
       .insert([
         {
           nombre: `${fields.nombre}`,
+          cargo: `${fields.cargo}`,
           licencia: `${fields.licencia}`,
-          desde: `${fields.desde}`,
-          hasta: `${fields.hasta}`,
+          mes: `${fields.mes}`,
           observaciones: `${fields.observaciones}`
         }
       ])
       .select()
 
     if (error) console.error(error)
-    if (data) console.log(data)
+    if (data) console.log(data) //  TODO: handle errors
   }
 
   return (
     <main>
       <h1>Licencias / Inasistencias</h1>
       <form className='formularioLic' onSubmit={manejoSubmit}>
-        <input name='nombre' type='text' placeholder='Nombre y apellidos...' />
+        <input name='nombre' className='nombre' type='text' placeholder='Nombre y apellidos...' />
+        <input name='cargo' type='text' placeholder='Cargo...' />
         <input name='licencia' type='text' placeholder='Licencia...' />
-        <input name='desde' type='date' />
-        <input name='hasta' type='date' />
+        <input name='mes' type='text' placeholder='Mes...' />
         <textarea name='observaciones' className='observaciones' placeholder='Observaciones...' />
-        <button type='submit'>Añadir licencia</button>
+        <button className='boton' type='submit'>Añadir licencia</button>
       </form>
     </main>
 
