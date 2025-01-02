@@ -7,7 +7,12 @@ export function App() {
 
   return (
     <>
-      <button onClick={() => setActivo(!activo)}>Planilla</button>
+      <button
+        onClick={() => setActivo(!activo)}
+        className="border bg-amber-600 text-white p-2 rounded-md m-3"
+      >
+        {activo ? "Formulario" : "Planilla"}
+      </button>
 
       {
         activo ? <Planilla></Planilla> : <Formulario></Formulario>
