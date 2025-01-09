@@ -48,7 +48,7 @@ export function Formulario() {
 
   return (
     <main className="p-4 flex flex-col items-center">
-      < h2 className="text-2xl font-bold mb-4 text-center" > Formulario de licencias</h2 >
+      < h2 className="text-2xl underline font-bold mb-4 text-center" > Formulario de licencias</h2 >
       <form className="flex flex-col border rounded-md p-5 w-1/2 mt-10" onSubmit={manejoDatos}>
         <label htmlFor="nombre" className="block mt-6" >
           Nombre:
@@ -67,7 +67,7 @@ export function Formulario() {
         </label>
         <input type="text" name="mes" id="mes" className="border-b-[1px] active:outline-none focus:outline-none focus:border-b-slate-600" />
 
-        <button type="submit" className="bg-amber-600 p-2 m-3 w-full text-white hover:bg-yellow-500 focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">Enviar</button>
+        <button type="submit" className="bg-amber-600 p-2 m-3 w-full text-white hover:bg-yellow-500 focus:outline-none font-bold rounded-full text-lg px-5 py-2.5 text-center me-2 mb-2">Enviar</button>
       </form>
 
       <ToastContainer
