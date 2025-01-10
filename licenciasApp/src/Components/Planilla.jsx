@@ -1,29 +1,31 @@
 export function Planilla() {
   const dias = Array.from({ length: 31 }, (_, i) => i + 1);
-
   const meses = [
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
   ]
 
-  const profesora = JSON.parse(localStorage.getItem("Profesoras"))
-  let agrupadosPorNombre = profesora.reduce((acc, item) => {
-    const { nombre, dia, mes, cod } = item
-    if (!acc[nombre]) {
-      acc[nombre] = []
-    }
-    acc[nombre].push({ dia, mes, cod })
-    return acc
-  }, {})
+  let agrupadosPorNombre = {}
+  if (localStorage.getItem("Profesoras")) {
+    const profesora = JSON.parse(localStorage.getItem("Profesoras"))
+    agrupadosPorNombre = profesora.reduce((acc, item) => {
+      const { nombre, dia, mes, cod } = item
+      if (!acc[nombre]) {
+        acc[nombre] = []
+      }
+      acc[nombre].push({ dia, mes, cod })
+      return acc
+    }, {})
 
-  console.log(agrupadosPorNombre)
+    console.log(agrupadosPorNombre)
+  }
 
   return (
-    <main className="p-4 flex flex-col items-center">
-      <h2 className="text-2xl font-bold mb-4 text-center">Planilla de asistencia</h2>
+    <main className="p-4 flex flex-col items-center justify-center">
+      <h2 className="text-2xl font-bold mb-4 mt-20 text-center underline">Planilla de inasistencias</h2>
       {
-        Object.keys(agrupadosPorNombre).map((nombre) => (
-          <article key={nombre} className="border rounded-md p-5 mb-4 w-[1080]">
+        localStorage.getItem("Profesoras") ? Object.keys(agrupadosPorNombre).map((nombre) => (
+          <article key={nombre} className="border rounded-md p-5 mb-4 mt-8 w-full overflow-x-scroll md:overflow-x-scroll lg:overflow-x-hidden">
             <nav className="mb-4 flex justify-between">
               <div className="flex">
                 <h2><b>Profesor/a:</b></h2>
@@ -32,7 +34,7 @@ export function Planilla() {
               </div>
             </nav>
             <div>
-              <table className="table-auto border-collapse text-sm">
+              <table className="table-auto w-full border-collapse text-sm">
                 <thead>
                   <tr>
                     <th className="border px-2 py-1 bg-gray-200">Mes/Día</th>
@@ -66,7 +68,7 @@ export function Planilla() {
               </table>
             </div>
           </article>
-        ))
+        )) : "No hay datos para mostrar"
       }
     </main >
   )
