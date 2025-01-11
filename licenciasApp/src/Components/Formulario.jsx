@@ -40,11 +40,6 @@ export function Formulario() {
 
     localStorage.setItem("Profesoras", JSON.stringify(profesoras))
     window.dispatchEvent(new Event("storage"))
-
-    e.target.nombre.value = ""
-    e.target.cod.value = ""
-    e.target.dia.value = ""
-    e.target.mes.value = ""
   }
 
   return (
