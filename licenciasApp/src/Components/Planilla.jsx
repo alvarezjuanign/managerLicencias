@@ -1,5 +1,5 @@
 export function Planilla() {
-  const dias = Array.from({ length: 31 }, (_, i) => i + 1);
+  const dias = Array.from({ length: 31 }, (_, i) => i + 1)
   const meses = [
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
@@ -9,15 +9,28 @@ export function Planilla() {
   if (localStorage.getItem("Profesoras")) {
     const profesora = JSON.parse(localStorage.getItem("Profesoras"))
     agrupadosPorNombre = profesora.reduce((acc, item) => {
-      const { nombre, dia, mes, cod } = item
+      const { nombre, dia, mes, cod, cantDias } = item
       if (!acc[nombre]) {
         acc[nombre] = []
       }
-      acc[nombre].push({ dia, mes, cod })
+      acc[nombre].push({ dia, mes, cod, cantDias })
       return acc
     }, {})
-
     console.log(agrupadosPorNombre)
+  }
+
+  const manejoCantDias = (nombre, dia, mes) => {
+    const registro = agrupadosPorNombre[nombre] || []
+    for (const item of registro) {
+      const diaInicial = parseInt(item.dia)
+      const diaFin = parseInt(item.cantDias) + diaInicial - 1
+      if (item.mes.toLowerCase() === mes.toLowerCase() && dia >= diaInicial && dia <= diaFin) {
+        return item.cod
+      }
+      else {
+        return ""
+      }
+    }
   }
 
   return (
@@ -55,10 +68,7 @@ export function Planilla() {
                       {dias.map((dia) => (
                         <td key={`${mes}-${dia}`} className="border min-w-[52px] text-center">
                           <button className="w-full h-full hover:opacity-55">
-                            {
-                              agrupadosPorNombre[nombre]?.find((item) => parseInt(item.dia) === parseInt(dia) && item.mes.toLowerCase() === mes.toLowerCase())?.cod
-                              ?? " "
-                            }
+                            {manejoCantDias(nombre, dia, mes)}
                           </button>
                         </td>
                       ))}
