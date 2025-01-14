@@ -34,6 +34,11 @@ export function Formulario() {
     }
 
     const profesora = Object.fromEntries(new FormData(e.target))
+
+    if (e.target.cantDias.value == "") {
+      profesora.cantDias = "1"
+    }
+
     profesoras.push(profesora)
 
     notify()
@@ -47,7 +52,7 @@ export function Formulario() {
       <h2 className="text-2xl underline font-bold mb-4 text-center" > Formulario de licencias</h2 >
       <form className="flex flex-col border border-grey-400 rounded-md p-5 w-3/4 mt-10 shadow-xl lg:w-1/2" onSubmit={manejoDatos}>
         <div className="md:grid grid-cols-2 gap-8 justify-items-center">
-          <p className="w-full">
+          <p className="w-full col-span-2">
             <label htmlFor="nombre" className="block mt-4" >
               Nombre:
             </label>
@@ -59,6 +64,13 @@ export function Formulario() {
               Cod. Licencia:
             </label>
             <input type="text" name="cod" id="cod" className="w-full border-b border-gray-300 py-1 focus:border-b focus:border-blue-400 transition-colors focus:outline-none peer bg-inherit" maxLength={6} />
+          </p>
+
+          <p className="w-full mt-4">
+            <label htmlFor="cantDias">
+              Cantidad de días:
+            </label>
+            <input type="text" name="cantDias" id="cantDias" className="w-full border-b border-gray-300 py-1 focus:border-b focus:border-blue-400 transition-colors focus:outline-none peer bg-inherit" placeholder="1, 2, 3..." />
           </p>
 
           <p className="w-full mt-4">
