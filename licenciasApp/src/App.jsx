@@ -9,8 +9,10 @@ export function App() {
   const [profesoras, setProfesoras] = useState(true)
 
   const handleDelete = () => {
-    confirm("¿Estás seguro de borrar los datos?")
-    localStorage.removeItem("Profesoras")
+    if (confirm("¿Estás seguro de borrar los datos?")) {
+      localStorage.removeItem("Profesoras")
+    }
+
     toast.success('Datos borrados', {
       position: "top-right",
       autoClose: 3000,
