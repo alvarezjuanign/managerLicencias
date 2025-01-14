@@ -11,20 +11,19 @@ export function App() {
   const handleDelete = () => {
     if (confirm("¿Estás seguro de borrar los datos?")) {
       localStorage.removeItem("Profesoras")
+      toast.success('Datos borrados', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "dark",
+      })
+
+      window.dispatchEvent(new Event("storage"))
     }
-
-    toast.success('Datos borrados', {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: false,
-      draggable: false,
-      progress: undefined,
-      theme: "dark",
-    })
-
-    window.dispatchEvent(new Event("storage"))
   }
 
   useEffect(() => {
