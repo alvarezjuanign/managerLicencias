@@ -19,7 +19,7 @@ export function App() {
         pauseOnHover: false,
         draggable: false,
         progress: undefined,
-        theme: "dark",
+        theme: "light"
       })
 
       window.dispatchEvent(new Event("storage"))
