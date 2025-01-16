@@ -94,7 +94,6 @@ export function Planilla() {
 
                 <tbody>
                   {meses.map((mes) => (
-                    console.log(meses.indexOf(mes)),
                     <tr key={meses.indexOf(mes)}>
                       <td className="border px-2 py-1 font-medium bg-gray-100">
                         {mes}
