@@ -1,71 +1,49 @@
-import { useState } from 'react'
-import { Planilla } from './Components/Planilla.jsx'
-import { Formulario } from './Components/Formulario.jsx'
-import { ToastContainer, toast } from 'react-toastify'
-import { useEffect } from 'react'
+import { useEffect, useState } from "react"
+import { Tabla } from "./components/Tabla.jsx"
+import plus from "./assets/plus.svg"
 
 export function App() {
-  const [activo, setActivo] = useState(false)
-  const [profesoras, setProfesoras] = useState(true)
+  const [tabla, setTabla] = useState([])
 
-  const handleDelete = () => {
-    if (confirm("¿Estás seguro de borrar los datos?")) {
-      localStorage.removeItem("Profesoras")
-      toast.success('Datos borrados', {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: false,
-        draggable: false,
-        progress: undefined,
-        theme: "light"
-      })
-
-      window.dispatchEvent(new Event("storage"))
+  const manejoAgregar = () => {
+    const tablaProfesor = {
+      "info": [],
+      "tabla": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ]
     }
+
+    setTabla([...tabla, tablaProfesor])
+    localStorage.setItem("profesores", JSON.stringify([...tabla, tablaProfesor]))
   }
 
   useEffect(() => {
-    const revisarLocalStorage = () => {
-      const data = localStorage.getItem("Profesoras")
-      setProfesoras(!data)
-    }
-    revisarLocalStorage()
-
-    window.addEventListener("storage", revisarLocalStorage)
-
-    return () => {
-      window.removeEventListener("storage", revisarLocalStorage)
-    }
+    const profesores = localStorage.getItem("profesores")
+    setTabla(profesores ? JSON.parse(profesores) : [])
   }, [])
 
   return (
-    <main className="h-screen">
-      <nav>
-        <button
-          onClick={() => setActivo(!activo)}
-          className="absolute mt-4 ml-4 w-36 bg-[#B0D7FF] text-[#2D3142] border border-transparent px-5 py-2 rounded-full shadow-md hover:bg-[#EAE8FF] hover:text-[#ADACB5] active:bg-[#ADACB5] active:text-[#EAE8FF] focus:ring-2 focus:ring-[#B0D7FF] focus:outline-none transition-all duration-200"
-        >
-          {activo ? "Formulario" : "Planilla"}
-        </button>
-
-        {
-          activo ?
-            <>
-              <button
-                disabled={profesoras}
-                onClick={handleDelete}
-                className=" absolute left-40 mt-4 ml-4 w-36 bg-[#B0D7FF] text-[#2D3142] border border-transparent px-5 py-2 rounded-full shadow-md hover:bg-[#EAE8FF] hover:text-[#ADACB5] active:bg-[#ADACB5] active:text-[#EAE8FF] focus:ring-2 focus:ring-[#B0D7FF] focus:outline-none transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-[#B0D7FF] disabled:text-[#2D3142]"
-              >
-                Borrar datos
-              </button>
-              <Planilla></Planilla>
-              <ToastContainer />
-            </>
-            : <Formulario></Formulario>
-        }
-      </nav>
+    <main className="flex flex-col items-center p-0 m-0">
+      <h1 className="text-2xl font-bold mt-8 print:hidden">Licencias</h1>
+      <section className="flex flex-col items-center w-screen p-5">
+        {tabla.map((tabla, index) => (
+          <Tabla key={index} orden={index} />
+        ))}
+      </section>
+      <div className="m-8 h-[80px] w-1/2 flex items-center justify-center border-dashed border rounded-md hover:cursor-pointer hover:opacity-45 print:hidden" >
+        <img src={plus} alt="simbolo mas para agregar tabla" onClick={manejoAgregar} title="Agregar tabla" className="group cursor-pointer outline-none hover:rotate-90 duration-300" />
+      </div>
     </main>
   )
 }
