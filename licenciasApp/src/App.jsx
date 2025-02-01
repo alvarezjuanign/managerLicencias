@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Tabla } from "./components/Tabla.jsx"
 import plus from "./assets/plus.svg"
+import { Toaster, toast } from "sonner"
 
 export function App() {
   const [tabla, setTabla] = useState([])
@@ -13,6 +14,7 @@ export function App() {
 
     setTabla([...tabla, tablaProfesor])
     localStorage.setItem("profesores", JSON.stringify([...tabla, tablaProfesor]))
+    toast.success("Tabla agregada")
   }
 
   useEffect(() => {
@@ -38,7 +40,7 @@ export function App() {
           <Tabla key={index} orden={index} />
         ))}
       </section>
-
+      <Toaster richColors />
     </main>
   )
 }
