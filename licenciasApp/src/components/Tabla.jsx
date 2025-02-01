@@ -1,146 +1,132 @@
 import { useState } from "react"
 
 export const Tabla = ({ orden }) => {
-  const profesor = JSON.parse(localStorage.getItem("profesores"))
+  const meses = [
+    { id: 0, nombre: "Nov. 24" },
+    { id: 1, nombre: "Dic. 24" },
+    { id: 2, nombre: "Ene. 25" },
+    { id: 3, nombre: "Feb. 25" },
+    { id: 4, nombre: "Mar. 25" },
+    { id: 5, nombre: "Abr. 25" },
+    { id: 6, nombre: "May. 25" },
+    { id: 7, nombre: "Jun. 25" },
+    { id: 8, nombre: "Jul. 25" },
+    { id: 9, nombre: "Ago. 25" },
+    { id: 10, nombre: "Sep. 25" },
+    { id: 11, nombre: "Oct. 25" },
+    { id: 12, nombre: "Nov. 25" }
+  ]
 
-  const [cod, setCod] = useState(() => {
-    return profesor[orden].tabla || Array.from({ length: 12 }, () => Array.from({ length: 31 }, () => ""))
+  const [profe, setProfe] = useState(() => {
+    const guardado = localStorage.getItem("profesores")
+    return guardado ? JSON.parse(guardado) : []
   })
 
-  const manejarValorInput = (e) => {
-    const index = e.target.id
+  const manejoInputInfo = (e) => {
+    let id = e.target.id
     const data = e.target.value
+    id = parseInt(id)
 
-    if (profesor) {
-      profesor[orden].info[index] = data
-      localStorage.setItem("profesores", JSON.stringify(profesor))
-    }
+    const copiaProfe = [...profe]
+    copiaProfe[orden] = { ...copiaProfe[orden] }
+    copiaProfe[orden].info[id] = data
+
+    localStorage.setItem("profesores", JSON.stringify(copiaProfe))
+    setProfe(copiaProfe)
   }
 
-  const manejoDias = (e, mes, dia) => {
-    const codigos = [...cod]
-    codigos[mes][dia - 1] = e.target.value
-    setCod(codigos)
-    profesor[orden].tabla[mes][dia - 1] = e.target.value
-    localStorage.setItem("profesores", JSON.stringify(profesor))
+  const manejoCelda = (e) => {
+    const data = e.target.value
+    const id = e.target.id.split("-")
+    let [fil, col] = id.map(Number)
+    fil = parseInt(fil)
+    col = parseInt(col)
+
+    const copiaProfe = [...profe]
+    copiaProfe[orden] = { ...copiaProfe[orden] }
+    copiaProfe[orden].tabla = [...copiaProfe[orden].tabla]
+    copiaProfe[orden].tabla[fil] = [...copiaProfe[orden].tabla[fil]]
+    copiaProfe[orden].tabla[fil][col] = data
+
+    localStorage.setItem("profesores", JSON.stringify(copiaProfe))
+    setProfe(copiaProfe)
   }
 
-  const meses = [
-    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-  ]
-  const dias = Array.from({ length: 31 }, (_, index) => index + 1)
+  if (!profe?.[orden]) return <p>No hay profesores</p>
 
   return (
     <article className="w-full m-5 shadow-md border border-gray-300 rounded-md relative p-6 print:text-xs print:p-0 print:border-none">
       <nav className="print:w-3/4">
         <ul className="flex flex-wrap gap-5 justify-evenly mb-4 print:flex-nowrap">
-          <li className="flex">
+          <li className="flex gap-2">
             <p><b>Profesor/a:</b></p>
             {
-              profesor[orden].info[0]
-                ? <p
-                  className="w-[150px] bg-inherit ml-2 focus:outline-none">
-                  {profesor[orden].info[0]}
-                </p>
-                : <input
-                  type="text"
-                  autoComplete="nombre"
-                  placeholder="Maria, Miriam..."
-                  className="w-[150px] bg-inherit ml-2 focus:outline-none"
-                  id="0"
-                  onChange={(e) => manejarValorInput(e)}
-                />
+              profe[orden].info[0]
+                ? <p>{profe[orden].info[0]}</p>
+                : <input type="text" id="0" placeholder="Maria, Miriam..." onBlur={manejoInputInfo} />
             }
           </li>
-          <li className="flex">
+          <li className="flex gap-2">
             <p><b>DNI:</b></p>
-            {profesor[orden].info[1]
-              ? <p
-                className="w-[150px] bg-inherit ml-2 focus:outline-none">
-                {profesor[orden].info[1]}
-              </p>
-              : <input
-                type="text"
-                autoComplete="dni"
-                placeholder="123456789"
-                className="w-[150px] bg-inherit ml-2 focus:outline-none"
-                id="1"
-                onChange={(e) => manejarValorInput(e)}
-              />
+            {
+              profe[orden].info[1]
+                ? <p>{profe[orden].info[1]}</p>
+                : <input type="text" id="1" placeholder="12345678" onBlur={manejoInputInfo} />
             }
           </li>
-          <li className="flex">
+          <li className="flex gap-2">
             <p><b>Cargo:</b></p>
-            {profesor[orden].info[2]
-              ? <p
-                className="w-[150px] bg-inherit ml-2 focus:outline-none">
-                {profesor[orden].info[2]}
-              </p>
-              : <input
-                type="text"
-                autoComplete="cargo"
-                placeholder="Titular, Suplente..."
-                className="w-[150px] bg-inherit ml-2 focus:outline-none"
-                id="2"
-                onChange={(e) => manejarValorInput(e)}
-              />
+            {
+              profe[orden].info[2]
+                ? <p>{profe[orden].info[2]}</p>
+                : <input type="text" id="2" placeholder="Titular, Suplente..." onBlur={manejoInputInfo} />
             }
           </li>
-          <li className="flex">
+          <li className="flex gap-2">
             <p><b>Turno:</b></p>
-            {profesor[orden].info[3]
-              ? <p
-                className="w-[150px] bg-inherit ml-2 focus:outline-none">
-                {profesor[orden].info[3]}
-              </p>
-              : <input
-                type="text"
-                autoComplete="turno"
-                placeholder="Mañana, Tarde..."
-                className="w-[150px] bg-inherit ml-2 focus:outline-none"
-                id="3"
-                onChange={(e) => manejarValorInput(e)}
-              />
+            {
+              profe[orden].info[3]
+                ? <p>{profe[orden].info[3]}</p>
+                : <input type="text" id="3" placeholder="Mañana, Tarde..." onBlur={manejoInputInfo} />
             }
           </li>
         </ul>
       </nav>
-      <table className="w-full border-collapse text-sm">
-        <thead>
-          <tr>
-            <th className="border border-gray-300">Mes</th>
-            {dias.map(dia => (
-              <th key={dia} className="border border-gray-300 p-1">
-                {dia}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {meses.map((mes, index) => (
-            <tr key={mes} className="border-b border-gray-200 hover:bg-gray-5">
-              <td className="border border-gray-300 p-2 print:p-1 print:text-xs">{mes}</td>
-              {dias.map(dia => (
-                <td key={dia} id={`${mes}-${dia}`} className="border border-gray-300 w-[90px]" >
-                  {
-                    profesor[orden].tabla[index][dia - 1]
-                      ? <p
-                        className="w-full h-full bg-inherit text-center text-xs focus:outline-none">
-                        {profesor[orden].tabla[index][dia - 1]}
-                      </p>
-                      : <input
-                        type="text"
-                        className="w-full h-full bg-inherit text-center text-xs focus:outline-none"
-                        id={`${index + 1}-${dia}`}
-                        onBlur={(e) => manejoDias(e, index, dia)} />
-                  }
-                </td>
+      <div className="overflow-x-auto">
+        <table className="min-w-full border-collapse">
+          <thead>
+            <tr>
+              <th className="border p-2 bg-gray-100 left-0 z-10 sticky">Mes/Día</th>
+              {Array.from({ length: 31 }, (_, i) => (
+                <th key={i} className="border p-2 bg-gray-100">
+                  {i + 1}
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </article >
+          </thead>
+          <tbody>
+            {meses.map((mes) => (
+              <tr key={mes.id}>
+                <td className="border p-1 font-medium sticky left-0 bg-white z-10">{mes.nombre}</td>
+                {Array.from({ length: 31 }, (_, colIndex) => (
+                  <td key={colIndex} className="border text-center">
+                    {
+                      profe[orden].tabla[mes.id][colIndex]
+                        ? <p>{profe[orden].tabla[mes.id]?.[colIndex]}</p>
+                        : <input
+                          type="text"
+                          id={`${mes.id}-${colIndex}`}
+                          className="w-full"
+                          onBlur={manejoCelda}
+                        />
+                    }
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </article>
   )
 }
