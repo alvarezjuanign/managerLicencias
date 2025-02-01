@@ -7,21 +7,8 @@ export function App() {
 
   const manejoAgregar = () => {
     const tablaProfesor = {
-      "info": [],
-      "tabla": [
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        []
-      ]
+      "info": ["", "", "", ""],
+      "tabla": [[], [], [], [], [], [], [], [], [], [], [], [], []]
     }
 
     setTabla([...tabla, tablaProfesor])
@@ -41,8 +28,15 @@ export function App() {
           <Tabla key={index} orden={index} />
         ))}
       </section>
-      <div className="m-8 h-[80px] w-1/2 flex items-center justify-center border-dashed border rounded-md hover:cursor-pointer hover:opacity-45 print:hidden" >
-        <img src={plus} alt="simbolo mas para agregar tabla" onClick={manejoAgregar} title="Agregar tabla" className="group cursor-pointer outline-none hover:rotate-90 duration-300" />
+      <div
+        onClick={manejoAgregar}
+        className="m-8 h-[80px] w-1/2 flex items-center justify-center border-dashed border border-black rounded-md hover:cursor-pointer hover:opacity-45 print:hidden
+        hover:scale-110 duration-300" >
+        <img
+          src={plus}
+          alt="simbolo mas para agregar tabla"
+          title="Agregar tabla"
+          className="group cursor-pointer outline-none scale-125" />
       </div>
     </main>
   )
