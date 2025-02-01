@@ -1,4 +1,5 @@
 import { useState } from "react"
+import "./printStyles.css"
 
 export const Tabla = ({ orden }) => {
   const meses = [
@@ -55,15 +56,15 @@ export const Tabla = ({ orden }) => {
   if (!profe?.[orden]) return <p>No hay profesores</p>
 
   return (
-    <article className="w-full m-5 shadow-md border border-gray-300 rounded-md relative p-6 print:text-xs print:p-0 print:border-none">
-      <nav className="print:w-3/4">
+    <article className="w-full mt-5 shadow-md border border-gray-300 rounded-md relative p-6 print:shadow-none print:text-xs print:p-0 print:border-none">
+      <nav className="print:w-3/4 print:justify-center print:mx-auto">
         <ul className="flex flex-wrap gap-5 justify-evenly mb-4 print:flex-nowrap">
           <li className="flex gap-2">
             <p><b>Profesor/a:</b></p>
             {
               profe[orden].info[0]
                 ? <p>{profe[orden].info[0]}</p>
-                : <input type="text" id="0" placeholder="Maria, Miriam..." onBlur={manejoInputInfo} />
+                : <input type="text" id={`nombreProfesor-${orden}`} placeholder="Maria, Miriam..." onBlur={manejoInputInfo} />
             }
           </li>
           <li className="flex gap-2">
@@ -71,7 +72,7 @@ export const Tabla = ({ orden }) => {
             {
               profe[orden].info[1]
                 ? <p>{profe[orden].info[1]}</p>
-                : <input type="text" id="1" placeholder="12345678" onBlur={manejoInputInfo} />
+                : <input type="text" id={`dniProfesor-${orden}`} placeholder="12345678" onBlur={manejoInputInfo} />
             }
           </li>
           <li className="flex gap-2">
@@ -79,7 +80,7 @@ export const Tabla = ({ orden }) => {
             {
               profe[orden].info[2]
                 ? <p>{profe[orden].info[2]}</p>
-                : <input type="text" id="2" placeholder="Titular, Suplente..." onBlur={manejoInputInfo} />
+                : <input type="text" id={`cargoProfesor-${orden}`} placeholder="Titular, Suplente..." onBlur={manejoInputInfo} />
             }
           </li>
           <li className="flex gap-2">
@@ -87,12 +88,12 @@ export const Tabla = ({ orden }) => {
             {
               profe[orden].info[3]
                 ? <p>{profe[orden].info[3]}</p>
-                : <input type="text" id="3" placeholder="Mañana, Tarde..." onBlur={manejoInputInfo} />
+                : <input type="text" id={`turnoProfesor-${orden}`} placeholder="Mañana, Tarde..." onBlur={manejoInputInfo} />
             }
           </li>
         </ul>
       </nav>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto print:overflow-visible">
         <table className="min-w-full border-collapse">
           <thead>
             <tr>
@@ -115,7 +116,7 @@ export const Tabla = ({ orden }) => {
                         ? <p>{profe[orden].tabla[mes.id]?.[colIndex]}</p>
                         : <input
                           type="text"
-                          id={`${mes.id}-${colIndex}`}
+                          id={`celda-${orden}-${mes.id}-${colIndex}`}
                           className="w-full"
                           onBlur={manejoCelda}
                         />

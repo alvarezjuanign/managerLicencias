@@ -23,7 +23,7 @@ export function App() {
   return (
     <main className="flex flex-col items-center p-0 m-0">
       <h1 className="text-2xl font-bold mt-8 print:hidden">Licencias</h1>
-      <section className="flex flex-col items-center w-screen p-5">
+      <section className="flex flex-col items-center w-screen p-5 print:p-0">
         {tabla.map((tabla, index) => (
           <Tabla key={index} orden={index} />
         ))}
