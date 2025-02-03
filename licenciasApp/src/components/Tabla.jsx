@@ -40,7 +40,6 @@ export const Tabla = ({ orden }) => {
   const manejoCelda = (e) => {
     const data = e.target.value
     const id = e.target.id.split("-")
-    console.log(id)
     let fil = id[2]
     let col = id[3]
     fil = parseInt(fil)
@@ -51,11 +50,6 @@ export const Tabla = ({ orden }) => {
     copiaProfe[orden].tabla = [...copiaProfe[orden].tabla]
     copiaProfe[orden].tabla[fil] = [...copiaProfe[orden].tabla[fil]]
     copiaProfe[orden].tabla[fil][col] = data
-
-    console.log(copiaProfe);
-    console.log(copiaProfe[orden]);
-    console.log(copiaProfe[orden].tabla);
-    console.log(copiaProfe[orden].tabla[fil]);
 
     localStorage.setItem("profesores", JSON.stringify(copiaProfe))
     setProfe(copiaProfe)
