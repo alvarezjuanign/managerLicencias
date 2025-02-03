@@ -25,6 +25,7 @@ export const Tabla = ({ orden }) => {
 
   const manejoInputInfo = (e) => {
     let id = e.target.id
+    id = id.split("-")[2]
     const data = e.target.value
     id = parseInt(id)
 
@@ -39,7 +40,9 @@ export const Tabla = ({ orden }) => {
   const manejoCelda = (e) => {
     const data = e.target.value
     const id = e.target.id.split("-")
-    let [fil, col] = id.map(Number)
+    console.log(id)
+    let fil = id[2]
+    let col = id[3]
     fil = parseInt(fil)
     col = parseInt(col)
 
@@ -48,6 +51,11 @@ export const Tabla = ({ orden }) => {
     copiaProfe[orden].tabla = [...copiaProfe[orden].tabla]
     copiaProfe[orden].tabla[fil] = [...copiaProfe[orden].tabla[fil]]
     copiaProfe[orden].tabla[fil][col] = data
+
+    console.log(copiaProfe);
+    console.log(copiaProfe[orden]);
+    console.log(copiaProfe[orden].tabla);
+    console.log(copiaProfe[orden].tabla[fil]);
 
     localStorage.setItem("profesores", JSON.stringify(copiaProfe))
     setProfe(copiaProfe)
@@ -64,7 +72,7 @@ export const Tabla = ({ orden }) => {
             {
               profe[orden].info[0]
                 ? <p>{profe[orden].info[0]}</p>
-                : <input type="text" id={`nombreProfesor-${orden}`} placeholder="Maria, Miriam..." onBlur={manejoInputInfo} />
+                : <input type="text" id={`nombreProfesor-${orden}-0`} placeholder="Maria, Miriam..." onBlur={manejoInputInfo} />
             }
           </li>
           <li className="flex gap-2">
@@ -72,7 +80,7 @@ export const Tabla = ({ orden }) => {
             {
               profe[orden].info[1]
                 ? <p>{profe[orden].info[1]}</p>
-                : <input type="text" id={`dniProfesor-${orden}`} placeholder="12345678" onBlur={manejoInputInfo} />
+                : <input type="text" id={`dniProfesor-${orden}-1`} placeholder="12345678" onBlur={manejoInputInfo} />
             }
           </li>
           <li className="flex gap-2">
@@ -80,7 +88,7 @@ export const Tabla = ({ orden }) => {
             {
               profe[orden].info[2]
                 ? <p>{profe[orden].info[2]}</p>
-                : <input type="text" id={`cargoProfesor-${orden}`} placeholder="Titular, Suplente..." onBlur={manejoInputInfo} />
+                : <input type="text" id={`cargoProfesor-${orden}-2`} placeholder="Titular, Suplente..." onBlur={manejoInputInfo} />
             }
           </li>
           <li className="flex gap-2">
@@ -88,7 +96,7 @@ export const Tabla = ({ orden }) => {
             {
               profe[orden].info[3]
                 ? <p>{profe[orden].info[3]}</p>
-                : <input type="text" id={`turnoProfesor-${orden}`} placeholder="Mañana, Tarde..." onBlur={manejoInputInfo} />
+                : <input type="text" id={`turnoProfesor-${orden}-3`} placeholder="Mañana, Tarde..." onBlur={manejoInputInfo} />
             }
           </li>
         </ul>
@@ -113,11 +121,11 @@ export const Tabla = ({ orden }) => {
                   <td key={colIndex} className="border text-center">
                     {
                       profe[orden].tabla[mes.id][colIndex]
-                        ? <p>{profe[orden].tabla[mes.id]?.[colIndex]}</p>
+                        ? <p className="w-full">{profe[orden].tabla[mes.id]?.[colIndex]}</p>
                         : <input
                           type="text"
                           id={`celda-${orden}-${mes.id}-${colIndex}`}
-                          className="w-full"
+                          className="w-full text-center"
                           onBlur={manejoCelda}
                         />
                     }
