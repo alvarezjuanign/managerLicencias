@@ -55,8 +55,6 @@ export const Tabla = ({ orden }) => {
     setProfe(copiaProfe)
   }
 
-  if (!profe?.[orden]) return <p>No hay profesores</p>
-
   return (
     <article className="w-full mt-5 shadow-md border border-gray-300 rounded-md relative p-6 print:shadow-none print:text-xs print:p-0 print:border-none">
       <nav className="print:w-3/4 print:justify-center print:mx-auto">
