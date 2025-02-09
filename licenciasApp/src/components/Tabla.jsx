@@ -1,5 +1,5 @@
 import { useState } from "react"
-import "./printStyles.css"
+import "./impresion.css"
 
 export const Tabla = ({ orden }) => {
   const meses = [
@@ -50,6 +50,8 @@ export const Tabla = ({ orden }) => {
     copiaProfe[orden].tabla = [...copiaProfe[orden].tabla]
     copiaProfe[orden].tabla[fil] = [...copiaProfe[orden].tabla[fil]]
     copiaProfe[orden].tabla[fil][col] = data
+
+    copiaProfe[orden].total += 1
 
     localStorage.setItem("profesores", JSON.stringify(copiaProfe))
     setProfe(copiaProfe)
@@ -125,6 +127,10 @@ export const Tabla = ({ orden }) => {
                 ))}
               </tr>
             ))}
+            <tr>
+              <td className="border p-1 font-medium sticky left-0 bg-white z-10">Total</td>
+              <td className="border text-right" colSpan={31}>{profe[orden].total}</td>
+            </tr>
           </tbody>
         </table>
       </div>

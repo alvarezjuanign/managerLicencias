@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { Tabla } from "./components/Tabla.jsx"
 import { Toaster, toast } from "sonner"
-import { Busqueda } from "./components/BarraDeBusqueda.jsx"
 import { BotonBorrar } from "./components/BotonBorrar.jsx"
 import plus from "./assets/plus.svg"
 
@@ -11,7 +10,8 @@ export function App() {
   const manejoAgregar = () => {
     const tablaProfesor = {
       "info": ["", "", "", ""],
-      "tabla": [[], [], [], [], [], [], [], [], [], [], [], [], []]
+      "tabla": [[], [], [], [], [], [], [], [], [], [], [], [], []],
+      "total": 0
     }
 
     setTabla([...tabla, tablaProfesor])
@@ -31,7 +31,6 @@ export function App() {
 
   return (
     <main className="flex flex-col items-center p-0 m-0 relative">
-      <Busqueda />
       <BotonBorrar borrar={borrarDatos} />
       <button
         onClick={manejoAgregar}
