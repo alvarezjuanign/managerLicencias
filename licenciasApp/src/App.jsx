@@ -17,8 +17,7 @@ export function App() {
   const manejoAgregar = () => {
     const tablaProfesor = {
       info: ["", "", "", ""],
-      tabla: Array(13).fill([]).map(() => Array(31).fill("")),
-      total: 0
+      tabla: Array(13).fill([]).map(() => Array(31).fill(""))
     }
 
     setTabla((prevTabla) => [...prevTabla, tablaProfesor])
@@ -47,5 +46,5 @@ export function App() {
       </section>
       <Toaster richColors className="print:hidden" />
     </main>
-  );
+  )
 }

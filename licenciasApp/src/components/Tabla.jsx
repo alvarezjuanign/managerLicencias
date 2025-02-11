@@ -7,7 +7,7 @@ export const Tabla = ({ orden, datos, setDatos }) => {
     { id: 8, nombre: "Jul. 25" }, { id: 9, nombre: "Ago. 25" },
     { id: 10, nombre: "Sep. 25" }, { id: 11, nombre: "Oct. 25" },
     { id: 12, nombre: "Nov. 25" }
-  ];
+  ]
 
   const manejoInputInfo = (e) => {
     let id = parseInt(e.target.id.split("-")[2])
@@ -33,7 +33,7 @@ export const Tabla = ({ orden, datos, setDatos }) => {
   }
 
   return (
-    <article className="w-full mt-5 shadow-md border border-gray-300 rounded-md relative p-6 print:shadow-none print:text-xs print:p-0 print:border-none">
+    <article className="w-full mt-5 shadow-md border border-gray-300 rounded-md relative p-6 print:shadow-none print:text-xs print:p-2 print:border-none">
       <nav className="print:w-3/4 print:justify-center print:mx-auto">
         <ul className="flex flex-wrap gap-5 justify-evenly mb-4 print:flex-nowrap">
           {["Profesor/a", "DNI", "Cargo", "Turno"].map((campo, i) => (
@@ -77,6 +77,9 @@ export const Tabla = ({ orden, datos, setDatos }) => {
                 ))}
               </tr>
             ))}
+            <tr>
+              <td className="border p-1 font-medium sticky left-0 bg-white z-10"><b>Total:</b></td>
+            </tr>
           </tbody>
         </table>
       </div>
