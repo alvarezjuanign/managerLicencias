@@ -6,6 +6,7 @@ import { BarraBusqueda } from "./components/BarraBusqueda.jsx";
 import plus from "./assets/plus.svg";
 
 export function App() {
+  const [tablaGuardada, setTablaGuardada] = useState([]);
   const [tabla, setTabla] = useState(() => {
     const profesores = localStorage.getItem("profesores");
     return profesores ? JSON.parse(profesores) : [];
@@ -15,6 +16,10 @@ export function App() {
     localStorage.setItem("profesores", JSON.stringify(tabla));
   }, [tabla]);
 
+  useEffect(() => {
+    setTablaGuardada(tabla);
+  }, [tabla]);
+
   const manejoAgregar = () => {
     const tablaProfesor = {
       info: ["", "", "", ""],
@@ -22,7 +27,6 @@ export function App() {
         .fill([])
         .map(() => Array(31).fill("")),
     };
-
     setTabla((prevTabla) => [...prevTabla, tablaProfesor]);
     toast.success("Tabla agregada");
   };
@@ -30,18 +34,24 @@ export function App() {
   const borrarDatos = () => {
     localStorage.removeItem("profesores");
     setTabla([]);
+    setTablaGuardada([]);
   };
 
-  const [busqueda, setBusqueda] = useState();
-
-  const buscar = (e) => {
-    setBusqueda(e.target.value);
+  const manejoBusqueda = (busqueda) => {
+    if (busqueda === "") {
+      setTablaGuardada(tabla);
+    } else {
+      const tablaFiltrada = tabla.filter((tabla) =>
+        tabla.info[0]?.toLowerCase().includes(busqueda.toLowerCase())
+      );
+      setTablaGuardada(tablaFiltrada);
+    }
   };
 
   return (
     <main className="flex flex-col items-center p-0 m-0 relative">
-      <nav className="w-full flex justify-evenly">
-        <BarraBusqueda onChange={buscar} />
+      <nav className="w-full flex justify-evenly m-2">
+        <BarraBusqueda onSearch={manejoBusqueda} />
         <BotonBorrar borrar={borrarDatos} />
       </nav>
       <button
@@ -56,11 +66,20 @@ export function App() {
         />
       </button>
       <section className="flex flex-col items-center w-screen p-5 print:p-0">
-        {tabla.map((datosTabla, index) => (
-          <Tabla key={index} orden={index} datos={tabla} setDatos={setTabla} />
-        ))}
+        {tablaGuardada.length > 0 ? (
+          tablaGuardada.map((_, index) => (
+            <Tabla
+              key={index}
+              orden={index}
+              datos={tablaGuardada}
+              setDatos={setTabla}
+            />
+          ))
+        ) : (
+          <p className="text-gray-500">No se encontraron resultados.</p>
+        )}
       </section>
       <Toaster richColors className="print:hidden" />
     </main>
   );
-}
+};
