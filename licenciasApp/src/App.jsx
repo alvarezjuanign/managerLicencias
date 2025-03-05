@@ -26,6 +26,9 @@ export function App() {
       tabla: Array(13)
         .fill([])
         .map(() => Array(31).fill("")),
+      totalParos: 0,
+      totalAdministrativas: 0,
+      totalEnfermedad: 0
     };
     setTabla((prevTabla) => [...prevTabla, tablaProfesor]);
     toast.success("Tabla agregada");

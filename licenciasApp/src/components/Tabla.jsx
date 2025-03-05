@@ -93,12 +93,27 @@ export const Tabla = ({ orden, datos, setDatos }) => {
             ))}
             <tr>
               <td className="border p-1 font-medium sticky left-0 bg-white z-10">
-                <b>Total:</b>
+                <b>Paros: </b>
+              </td>
+              <td colSpan={2} className="border p-1 text-center">
+                <p>{datos[orden]?.totalParos}</p>
+              </td>
+              <td className="border p-1 font-medium sticky left-0 bg-white z-10" colSpan={4}>
+                <b>Licencias: </b>
+              </td>
+              <td colSpan={2} className="border p-1 text-center">
+                <p>{datos[orden]?.totalAdministrativas}</p>
+              </td>
+              <td className="border p-1 font-medium sticky left-0 bg-white z-10" colSpan={4}>
+                <b>Enfermedad: </b>
+              </td>
+              <td colSpan={2} className="border p-1 text-center">
+                <p>{datos[orden]?.totalEnfermedad}</p>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-    </article>
+    </article >
   );
 };
