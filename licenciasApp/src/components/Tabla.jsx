@@ -26,6 +26,34 @@ export const Tabla = ({ orden, datos, setDatos }) => {
     setDatos(copiaDatos);
   };
 
+  const manejoTotal = () => {
+    const copiaDatos = [...datos];
+    copiaDatos[orden] = { ...copiaDatos[orden] };
+    copiaDatos[orden].tabla = [...copiaDatos[orden].tabla];
+
+    let totalParos = 0;
+    let totalAdministrativas = 0;
+    let totalEnfermedad = 0;
+
+    copiaDatos[orden].tabla.forEach((mes) => {
+      mes.forEach((dia) => {
+        if (dia === "paro" || dia === "Paro") {
+          totalParos++;
+        } else if (dia === "Lic" || dia === "lic") {
+          totalAdministrativas++;
+        } else if (dia.includes("114")) {
+          totalEnfermedad++;
+        }
+      });
+    });
+
+    copiaDatos[orden].totalParos = totalParos;
+    copiaDatos[orden].totalAdministrativas = totalAdministrativas;
+    copiaDatos[orden].totalEnfermedad = totalEnfermedad;
+
+    setDatos(copiaDatos);
+  };
+
   const manejoCelda = (e) => {
     const data = e.target.value;
     const [, , fil, col] = e.target.id.split("-").map(Number);
@@ -36,6 +64,7 @@ export const Tabla = ({ orden, datos, setDatos }) => {
     copiaDatos[orden].tabla[fil][col] = data;
 
     setDatos(copiaDatos);
+    manejoTotal();
   };
 
   return (
