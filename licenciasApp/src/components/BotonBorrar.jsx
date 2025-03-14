@@ -9,12 +9,12 @@ export const BotonBorrar = ({ borrar }) => {
   const manejoBorrar = () => {
     document.querySelector("dialog").close();
     borrar();
-    toast.error("Datos borrados");
+    toast.success("Datos borrados");
   };
 
   const closeDialog = () => {
     document.querySelector("dialog").close();
-  }
+  };
 
   return (
     <div className="print:hidden">
@@ -27,13 +27,23 @@ export const BotonBorrar = ({ borrar }) => {
         <span className="font-medium">Borrar datos</span>
       </button>
       <dialog className="sm:max-w-md p-6 rounded-lg">
-        <p className="text-lg font-medium p-2 m-2">¿Estás seguro de que quieres borrar los datos?</p>
+        <p className="text-lg font-medium p-2 m-2">
+          ¿Estás seguro de que quieres borrar los datos?
+        </p>
         <footer className="flex gap-3 sm:justify-end">
-          <button type="button" className="flex gap-1 stroke-white bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors p-2" onClick={manejoBorrar}>
+          <button
+            type="button"
+            className="flex gap-1 stroke-white bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors p-2"
+            onClick={manejoBorrar}
+          >
             <img src={trash} className="w-5" alt="Icono de tacho de basura" />
             Borrar
           </button>
-          <button type="button" className="bg-white hover:bg-gray-50 text-gray-700 border border-gray-200 rounded-lg transition-colors p-2" onClick={closeDialog}>
+          <button
+            type="button"
+            className="bg-white hover:bg-gray-50 text-gray-700 border border-gray-200 rounded-lg transition-colors p-2"
+            onClick={closeDialog}
+          >
             Cancelar
           </button>
         </footer>

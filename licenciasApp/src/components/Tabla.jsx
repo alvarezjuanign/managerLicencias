@@ -1,3 +1,6 @@
+import trash from "../assets/trash.svg";
+import { toast, Toaster } from "sonner";
+
 export const Tabla = ({ orden, datos, setDatos }) => {
   const meses = [
     { id: 0, nombre: "Nov. 24" },
@@ -71,10 +74,26 @@ export const Tabla = ({ orden, datos, setDatos }) => {
     manejoTotal();
   };
 
+  const manejoBorrarTabla = () => {
+    const profesores = JSON.parse(localStorage.getItem("profesores") || []);
+    if (orden >= 0 && orden < profesores.length) {
+      profesores.splice(orden, 1);
+    }
+    toast.success("Tabla borrada correctamente");
+    localStorage.setItem("profesores", JSON.stringify(profesores));
+    setDatos(profesores);
+  };
+
   return (
     <article className="w-full mt-5 shadow-md border border-gray-300 rounded-md relative p-6 print:shadow-none print:text-xs print:p-2 print:border-none">
-      <nav className="print:w-3/4 print:justify-center print:mx-auto">
-        <ul className="flex flex-wrap gap-5 justify-evenly mb-4 bg-white rounded-lg border border-gray-200 p-6 shadow-sm print:mb-3 print:border-none print:shadow-none print:p-0 print:flex-nowrap">
+      <button
+        className="rounded-md absolute top-0 right-0 bg-red-500 hover:bg-red-600 print:hidden"
+        onClick={manejoBorrarTabla}
+      >
+        <img src={trash} className="h-8 p-1" />
+      </button>
+      <nav className="print:w-3/4 print:justify-center">
+        <ul className="flex flex-wrap gap-5 justify-evenly mb-4 print:mb-3 print:border-none print:shadow-none print:flex-nowrap">
           {["Profesor/a", "DNI", "Cargo", "Turno"].map((campo, i) => (
             <li key={i} className="flex gap-2">
               <p>
@@ -99,7 +118,10 @@ export const Tabla = ({ orden, datos, setDatos }) => {
                 Mes/Día
               </th>
               {Array.from({ length: 31 }, (_, i) => (
-                <th key={i} className="text-center font-medium text-gray-500 border-b">
+                <th
+                  key={i}
+                  className="text-center font-medium text-gray-500 border-b"
+                >
                   {i + 1}
                 </th>
               ))}
@@ -112,11 +134,14 @@ export const Tabla = ({ orden, datos, setDatos }) => {
                   {mes.nombre}
                 </td>
                 {Array.from({ length: 31 }, (_, colIndex) => (
-                  <td key={colIndex} className="text-center border-b border-gray-100 border-r">
+                  <td
+                    key={colIndex}
+                    className="text-center border-b border-gray-100 border-r"
+                  >
                     <input
                       type="text"
                       id={`celda-${orden}-${mes.id}-${colIndex}`}
-                      className="w-full text-center"
+                      className="w-full text-center print:text-xs"
                       value={datos[orden]?.tabla[mes.id]?.[colIndex] || ""}
                       onChange={manejoCelda}
                     />
@@ -133,11 +158,15 @@ export const Tabla = ({ orden, datos, setDatos }) => {
           </div>
           <div className="flex items-center gap-2">
             <span className="font-medium text-gray-500">Licencias: </span>
-            <span className="text-gray-700">{datos[orden]?.totalAdministrativas}</span>
+            <span className="text-gray-700">
+              {datos[orden]?.totalAdministrativas}
+            </span>
           </div>
           <div className="flex items-center gap-2">
             <span className="font-medium text-gray-500">Enfermedad: </span>
-            <span className="text-gray-700">{datos[orden]?.totalEnfermedad}</span>
+            <span className="text-gray-700">
+              {datos[orden]?.totalEnfermedad}
+            </span>
           </div>
           <div className="flex items-center gap-2">
             <span className="font-medium text-gray-500">Total: </span>
@@ -145,6 +174,7 @@ export const Tabla = ({ orden, datos, setDatos }) => {
           </div>
         </div>
       </div>
+      <Toaster />
     </article>
   );
 };
