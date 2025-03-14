@@ -111,7 +111,7 @@ export const Tabla = ({ orden, datos, setDatos }) => {
         </ul>
       </nav>
       <div className="overflow-x-auto print:overflow-visible">
-        <table className="min-w-full border-collapse">
+        <table className=" table-auto w-full border-collapse">
           <thead>
             <tr>
               <th className="text-left py-2 px-3 font-medium text-gray-500 border-b">
