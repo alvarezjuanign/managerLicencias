@@ -53,7 +53,7 @@ export function App() {
   };
 
   return (
-    <main className="flex flex-col items-center p-0 m-0 overflow-x-hidden">
+    <main className="flex flex-col items-center p-0 m-0">
       <nav className="w-full flex justify-evenly m-2">
         <BarraBusqueda onSearch={manejoBusqueda} />
         <BotonBorrar borrar={borrarDatos} />
