@@ -26,7 +26,7 @@ export const BotonBorrar = ({ borrar }) => {
         <img src={trash} alt="Icono de tacho de basura" className="w-5" />
         <span className="font-medium">Borrar datos</span>
       </button>
-      <dialog className="sm:max-w-md p-6 rounded-lg">
+      <dialog className="sm:max-w-xl p-6 rounded-lg">
         <p className="text-lg font-medium p-2 m-2">
           ¿Estás seguro de que quieres borrar los datos?
         </p>
