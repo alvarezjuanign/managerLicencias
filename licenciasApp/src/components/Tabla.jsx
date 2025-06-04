@@ -41,11 +41,11 @@ export const Tabla = ({ orden, datos, setDatos }) => {
 
     copiaDatos[orden].tabla.forEach((mes) => {
       mes.forEach((dia) => {
-        if (dia === "paro" || dia === "Paro") {
+        if (dia === "p" || dia === "P") {
           totalParos++;
-        } else if (dia === "Lic" || dia === "lic") {
+        } else if (dia === "a" || dia === "A") {
           totalAdministrativas++;
-        } else if (dia.includes("114")) {
+        } else if (dia === "e" || dia === "E") {
           totalEnfermedad++;
         }
       });
@@ -85,15 +85,15 @@ export const Tabla = ({ orden, datos, setDatos }) => {
   };
 
   return (
-    <article className="w-full mt-5 shadow-md border border-gray-300 rounded-md relative p-6 print:shadow-none print:text-xs print:p-2 print:border-none">
+    <article className="w-full mt-5 shadow-md border border-gray-300 rounded-md relative p-6 print:mb-20 print:shadow-none print:text-xs print:p-0 print:border-none">
       <button
-        className="rounded-md absolute top-0 right-0 bg-red-500 hover:bg-red-600 print:hidden"
+        className="flex rounded-md absolute top-0 right-0 bg-red-500 hover:bg-red-600 print:hidden"
         onClick={manejoBorrarTabla}
       >
         <img src={trash} className="h-8 p-1" />
       </button>
-      <nav className="print:w-3/4 print:justify-center">
-        <ul className="flex flex-wrap gap-5 justify-evenly mb-4 print:mb-3 print:border-none print:shadow-none print:flex-nowrap">
+      <nav>
+        <ul className="flex flex-wrap gap-5 mb-4 print:mb-2 print:border-none print:shadow-none print:flex-nowrap">
           {["Profesor/a", "DNI", "Cargo", "Turno"].map((campo, i) => (
             <li key={i} className="flex gap-2">
               <p>
@@ -105,16 +105,17 @@ export const Tabla = ({ orden, datos, setDatos }) => {
                 placeholder={campo}
                 value={datos[orden]?.info[i] || ""}
                 onChange={manejoInputInfo}
+                className="print:w-[]"
               />
             </li>
           ))}
         </ul>
       </nav>
-      <div className="overflow-x-auto print:overflow-visible">
-        <table className=" table-auto w-full border-collapse">
+      <div>
+        <table className="table-auto w-full border-collapse">
           <thead>
             <tr>
-              <th className="text-left py-2 px-3 font-medium text-gray-500 border-b">
+              <th className="text-left py-2 px-3 text-medium text-gray-500 border-b">
                 Mes/Día
               </th>
               {Array.from({ length: 31 }, (_, i) => (
@@ -130,7 +131,7 @@ export const Tabla = ({ orden, datos, setDatos }) => {
           <tbody>
             {meses.map((mes) => (
               <tr key={mes.id}>
-                <td className="border p-1 font-medium bg-white border-b border-gray-100">
+                <td className="border p-1 bg-white text-[14px] border-b border-gray-100">
                   {mes.nombre}
                 </td>
                 {Array.from({ length: 31 }, (_, colIndex) => (
@@ -157,7 +158,7 @@ export const Tabla = ({ orden, datos, setDatos }) => {
             <span className="text-gray-700">{datos[orden]?.totalParos}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="font-medium text-gray-500">Licencias: </span>
+            <span className="font-medium text-gray-500">Administrativas: </span>
             <span className="text-gray-700">
               {datos[orden]?.totalAdministrativas}
             </span>
