@@ -1,19 +1,55 @@
-# Proyecto de Gestión de Tablas de Profesores
+# Teacher Table Management System
 
-Este proyecto es una aplicación web que permite gestionar tablas dinámicas de profesores/as. Cada tabla incluye información sobre un/a profesor/a (nombre, DNI, cargo, turno) y una matriz de datos mensuales. La aplicación también incluye funcionalidades como búsqueda, agregar nuevas tablas, borrar datos y soporte para impresión.
+This web application allows for the management of dynamic teacher tables. Each record includes personal information (Name, ID/DNI, Position, Shift) and a monthly data matrix. The application features advanced search, the ability to add new tables, data deletion, and print support.
 
-## Características principales
+## Screenshots
+<img width="1853" height="984" alt="image" src="https://github.com/user-attachments/assets/9fec6842-cefd-480e-aec4-fcf0db2b3a0b" />
 
-- **Tablas dinámicas**: Genera tablas personalizadas para cada profesor/a.
-- **Búsqueda por nombre**: Filtra las tablas según el nombre del profesor/a ingresado.
-- **Agregar tablas**: Agrega nuevas tablas dinámicamente con un solo clic.
-- **Borrar datos**: Elimina todos los datos almacenados localmente.
-- **Impresión optimizada**: Ajusta las tablas para que se impriman correctamente en hojas A4, con un máximo de dos tablas por página.
-- **Persistencia de datos**: Guarda los datos en `localStorage` para mantenerlos entre sesiones.
 
-## Tecnologías utilizadas
+## Features
+- **Dynamic Tables:** Generate customized tables for each teacher.
+- **Search by Name:** Filter tables instantly by entering the teacher's name.
+- **Add Tables:** Dynamically add new tables with a single click.
+- **Clear Data:** Easily remove all locally stored data.
+- **Optimized Printing:** Automatically adjusts tables for A4 paper, ensuring a maximum of two tables per page.
+- **Data Persistence:** Uses localStorage to keep your data safe between sessions.
 
-- **React**: Framework principal para la interfaz de usuario.
-- **Tailwind CSS**: Biblioteca de estilos utilitarios para diseño responsivo.
-- **Sonner**: Biblioteca para mostrar notificaciones (toasts).
-- **LocalStorage**: Almacenamiento local para persistir los datos de las tablas.
+<hr/>
+
+## Getting Started
+
+### Prerequisites
+- NodeJs
+- Pnpm
+- Sonner
+
+<hr/>
+
+## Installation
+Clone the repository and navigate to the project directory:
+```
+bash
+git clone https://github.com/alvarezjuanign/managerLicencias.git
+cd managerLicencias
+```
+
+Install the dependencies:
+```
+bash
+pnpm install
+```
+
+Run the project:
+```
+bash
+pnpm run dev
+```
+
+Open your browser and navigate to:
+```
+http://localhost:5173/
+```
+
+Tecnologías utilizadas: </br>
+<img src="https://res.cloudinary.com/ddmtmwlja/image/upload/v1692310460/yvclpdci3whtdk4e9dwf.svg" width="50">
+<img src="https://res.cloudinary.com/ddmtmwlja/image/upload/v1692310460/lk9bc1j0rlwyjlx0aggq.svg" width="30">
