@@ -1,6 +1,6 @@
 # Teacher Table Management System
 
-This web application allows for the management of dynamic teacher tables. Each record includes personal information (Name, ID/DNI, Position, Shift) and a monthly data matrix. The application features advanced search, the ability to add new tables, data deletion, and print support.
+This web application allows for the management of dynamic teacher tables. Each record includes personal information and a monthly data matrix. The application features advanced search, the ability to add new tables, data deletion, and print support.
 
 ## Screenshots
 <img width="1853" height="984" alt="image" src="https://github.com/user-attachments/assets/9fec6842-cefd-480e-aec4-fcf0db2b3a0b" />
