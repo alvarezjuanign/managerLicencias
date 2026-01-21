@@ -51,5 +51,5 @@ http://localhost:5173/
 ```
 
 Tecnologías utilizadas: </br>
-<img src="https://res.cloudinary.com/ddmtmwlja/image/upload/v1692310460/yvclpdci3whtdk4e9dwf.svg" width="50">
+<img src="https://res.cloudinary.com/ddmtmwlja/image/upload/v1692310460/yvclpdci3whtdk4e9dwf.svg" width="30">
 <img src="https://res.cloudinary.com/ddmtmwlja/image/upload/v1692310460/lk9bc1j0rlwyjlx0aggq.svg" width="30">
