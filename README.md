@@ -51,5 +51,5 @@ http://localhost:5173/
 ```
 
 Tecnologías utilizadas: </br>
-<img src="https://res.cloudinary.com/ddmtmwlja/image/upload/v1692310460/yvclpdci3whtdk4e9dwf.svg" width="30">
-<img src="https://res.cloudinary.com/ddmtmwlja/image/upload/v1692310460/lk9bc1j0rlwyjlx0aggq.svg" width="30">
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
