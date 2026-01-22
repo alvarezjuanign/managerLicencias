@@ -1,47 +1,50 @@
-# Teacher Table Management System
+# 🏫 Teacher Table Management System
 
-This web application allows for the management of dynamic teacher tables. Each record includes personal information and a monthly data matrix. The application features advanced search, the ability to add new tables, data deletion, and print support.
+**A specialized tool for managing dynamic teacher records, featuring optimized printing and local data persistence.**
 
-## Screenshots
-<img width="1853" height="984" alt="image" src="https://github.com/user-attachments/assets/9fec6842-cefd-480e-aec4-fcf0db2b3a0b" />
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
 
+---
 
-## Features
-- **Dynamic Tables:** Generate customized tables for each teacher.
-- **Search by Name:** Filter tables instantly by entering the teacher's name.
-- **Add Tables:** Dynamically add new tables with a single click.
-- **Clear Data:** Easily remove all locally stored data.
-- **Optimized Printing:** Automatically adjusts tables for A4 paper, ensuring a maximum of two tables per page.
-- **Data Persistence:** Uses localStorage to keep your data safe between sessions.
+## 📸 Screenshots
 
-<hr/>
+![App Preview](https://github.com/user-attachments/assets/9fec6842-cefd-480e-aec4-fcf0db2b3a0b)
 
-## Getting Started
+---
 
-### Prerequisites
-- NodeJs
-- Pnpm
-- Sonner
+## ✨ Key Features
 
-<hr/>
+* **📋 Dynamic Tables:** Generate and manage customized tables for each teacher with personal info and monthly matrices.
+* **🔍 Smart Search:** Instant filtering by teacher name to find records in seconds.
+* **➕ Quick Add:** Effortlessly add new tables with a single click.
+* **🖨️ Optimized Printing:** Professional A4 layout support, automatically ensuring a maximum of two tables per page.
+* **💾 Data Persistence:** Powered by `localStorage` to keep all information safe even after closing the browser.
+* **🧹 Data Management:** Includes options to clear all stored data securely.
 
-## Installation
-Clone the repository and navigate to the project directory:
-```
-bash
-git clone https://github.com/alvarezjuanign/managerLicencias.git
+---
+
+## 🚀 Getting Started
+
+### 📋 Prerequisites
+* **Node.js** (v18 or higher)
+* **pnpm** (Recommended package manager)
+
+### 🛠️ Installation & Setup
+Clone the repository:
+```sh
+git clone [https://github.com/alvarezjuanign/managerLicencias.git](https://github.com/alvarezjuanign/managerLicencias.git)
 cd managerLicencias
 ```
 
 Install the dependencies:
-```
-bash
+```sh
 pnpm install
 ```
 
 Run the project:
-```
-bash
+```sh
 pnpm run dev
 ```
 
@@ -50,6 +53,4 @@ Open your browser and navigate to:
 http://localhost:5173/
 ```
 
-Tecnologías utilizadas: </br> </br>
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) </br>
-![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+<div align="center"> Developed with ❤️ by <a href="https://www.google.com/search?q=https://github.com/alvarezjuanign">Juan Ignacio Alvarez</a> </div>
