@@ -34,7 +34,7 @@
 ### 🛠️ Installation & Setup
 Clone the repository:
 ```sh
-git clone [https://github.com/alvarezjuanign/managerLicencias.git](https://github.com/alvarezjuanign/managerLicencias.git)
+git clone https://github.com/alvarezjuanign/managerLicencias.git
 cd managerLicencias
 ```
 
